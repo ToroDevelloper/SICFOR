@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Dr. Carlos Mendoza",
+        "specialty": "Desarrollo de Software",
+        "status": "activo",
+        "avatar": "https://ui-avatars.com/api/?name=Carlos+Mendoza&background=4a90e2&color=fff"
+    },
+    {
+        "id": 2,
+        "name": "MSc. Ana Torres",
+        "specialty": "Ciberseguridad",
+        "status": "activo",
+        "avatar": "https://ui-avatars.com/api/?name=Ana+Torres&background=e91e63&color=fff"
+    },
+    {
+        "id": 3,
+        "name": "Ing. Javier Gómez",
+        "specialty": "Inteligencia Artificial",
+        "status": "inactivo",
+        "avatar": "https://ui-avatars.com/api/?name=Javier+Gomez&background=9c27b0&color=fff"
+    },
+    {
+        "id": 4,
+        "name": "Lic. Sofía Rivera",
+        "specialty": "Diseño UX/UI",
+        "status": "activo",
+        "avatar": "https://ui-avatars.com/api/?name=Sofia+Rivera&background=ff9800&color=fff"
+    },
+    {
+        "id": 5,
+        "name": "Dra. Ana García",
+        "specialty": "Ciencia de Datos",
+        "status": "activo",
+        "avatar": "https://ui-avatars.com/api/?name=Ana+Garcia&background=00bcd4&color=fff"
+    }
+]
