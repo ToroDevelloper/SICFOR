@@ -1,15 +1,36 @@
+// Componente 1: Navegación
+document.getElementById('navigation-component').innerHTML = `
+    <ul class="nav-menu">
+        <li class="nav-item active" data-section="inicio">
+            <i class="fas fa-home"></i> Inicio / Listado
+        </li>
+        <li class="nav-item" data-section="crear">
+            <i class="fas fa-clipboard-list"></i> Crear evaluación
+        </li>
+        <li class="nav-item" data-section="notas">
+            <i class="fas fa-edit"></i> Registrar notas
+        </li>
+        <li class="nav-item" data-section="retroalimentacion">
+            <i class="fas fa-comments"></i> Retroalimentación
+        </li>
+        <li class="nav-item" data-section="reportes">
+            <i class="fas fa-chart-pie"></i> Reportes simples
+        </li>
+    </ul>
+`;
+
 // Componente 2: Encabezado
- document.getElementById('header-component').innerHTML = `
-     <div class="page-title">
-         <h2>Evaluaciones y Calificaciones</h2>
-         <p>Grupo H - Gestión de evaluaciones, calificaciones y retroalimentación</p>
+document.getElementById('header-component').innerHTML = `
+    <div class="page-title">
+        <h2>Evaluaciones y Calificaciones</h2>
+        <p>Grupo H - Gestión de evaluaciones, calificaciones y retroalimentación</p>
     </div>
-     <div class="user-info">
+    <div class="user-info">
         <div class="user-avatar">JD</div>
-         <div class="user-details">
+        <div class="user-details">
             <h3>Juan Docente</h3>
             <p>Docente - Evaluaciones</p>
-         </div>
+        </div>
     </div>
 `;
 
