@@ -1,3 +1,18 @@
+// Componente 2: Encabezado
+ document.getElementById('header-component').innerHTML = `
+     <div class="page-title">
+         <h2>Evaluaciones y Calificaciones</h2>
+         <p>Grupo H - Gestión de evaluaciones, calificaciones y retroalimentación</p>
+    </div>
+     <div class="user-info">
+        <div class="user-avatar">JD</div>
+         <div class="user-details">
+            <h3>Juan Docente</h3>
+            <p>Docente - Evaluaciones</p>
+         </div>
+    </div>
+`;
+
 // Componente 3: Contenido
 document.getElementById('content-component').innerHTML = `
     <div class="card">
