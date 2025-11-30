@@ -1,27 +1,23 @@
 {
-  "name": "sicfor",
+  "name": "sicfor-tickets-grupo-j",
+  "private": true,
   "version": "1.0.0",
-  "description": "Este proyecto es un Sistema Integral de Gestión para un Centro de Formación y Cursos (SICFOR), desarrollado con Node.js, Express y MySQL.",
-  "main": "app.js",
+  "type": "module",
+  "description": "Módulo de Mesa de Ayuda y Soporte - Sistema Integral SICFOR - Grupo J",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ToroDevelloper/SICFOR.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/ToroDevelloper/SICFOR/issues"
-  },
-  "homepage": "https://github.com/ToroDevelloper/SICFOR#readme",
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mysql2": "^3.15.3"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.20.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8"
   }
 }
