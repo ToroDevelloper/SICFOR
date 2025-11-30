@@ -56,6 +56,7 @@ Módulo completamente independiente para la gestión de tickets de soporte técn
 
 ## 📁 Estructura del Proyecto
 
+
 ```
 sicfor-tickets-grupo-j/
 ├── public/
