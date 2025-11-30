@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>SICFOR - Catálogo de Cursos</title>
+<style>
+ body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+ }
+ .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    border: 2px solid #000;
+    min-height: 100vh;
+    border-radius: 20px;
+ }
+ .left-panel {
+    border-right: 2px solid #000;
+    padding: 10px;
+ }
+ .left-panel input {
+    width: 100%;
+    margin-bottom: 10px;
+ }
+ .course-list {
+    list-style: none;
+    padding: 0;
+ }
+ .course-list li {
+    padding: 3px 0;
+    border-bottom: 1px solid #000;
+ }
+ .right-panel {
+    padding: 15px;
+ }
+ .user-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+ }
+ .user-icon {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000;
+ }
+ .buttons {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+ }
+ .buttons button {
+    border: 2px solid #000;
+    background: #fff;
+    padding: 5px 10px;
+ }
+ .field {
+    margin-bottom: 10px;
+ }
+ .field label {
+    display: block;
+    font-weight: bold;
+ }
+ .field input {
+    width: 100%;
+    border: 1px solid #000;
+    padding: 3px;
+ }
+ .modalidad {
+    display: flex;
+    gap: 20px;
+ }
+</style>
+
+</html><!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SICFOR - Catálogo de cursos (Mockup)</title>
+  <style>
+    :root{
+      --bg:#f6f7f9;
+      --card:#ffffff;
+      --accent:#4A90E2;
+      --muted:#6b7280;
+      --border:#e6e9ef;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111;}
+
+    .container{
+      width:100%;
+      max-width:none;
+      margin:0;
+      padding:18px;
+      display:grid;
+      grid-template-columns:260px 1fr;
+      grid-template-rows:auto 1fr;
+      gap:18px;
+      height:100vh;
+    }
+
+    header.full{
+      grid-column:1 / -1;
+      background:var(--card);
+      padding:16px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:6px;
+    }
+    .header-left{display:flex;align-items:center;gap:16px}
+    .header-right{display:flex;align-items:center}
+    .profile-inline{display:flex;align-items:center;gap:12px}
+    header .title{font-weight:800;letter-spacing:1px}
+    header .controls{display:flex;gap:12px;align-items:center}
+    .search{display:flex;align-items:center;background:#fafbff;border:1px solid var(--border);padding:6px 10px;border-radius:6px}
+    .search input{border:0;background:transparent;outline:none;width:220px}
+    .header-left .title{font-weight:800;letter-spacing:1px}
+    .header-left .search{margin-left:12px}
+
+    /* SIDEBAR */
+    .sidebar{background:var(--card);padding:12px;border-radius:8px;border:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
+    .sidebar h3{margin:4px 0 10px;font-size:14px;color:var(--muted)}
+    .course-list{flex:1;overflow:auto;padding-right:6px}
+    .course-item{padding:10px;border-radius:6px;margin-bottom:8px;border:1px dashed transparent;cursor:pointer}
+    .course-item:hover{background:#fbfdff}
+    .course-item.active{background:linear-gradient(90deg,#f0f6ff, #fff);border:1px solid #dbeeff}
+    .pager{display:flex;justify-content:center;gap:6px;padding-top:8px;color:var(--muted)}
+
+    /* MAIN */
+    .main{background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border);display:flex;flex-direction:column;min-height:0}
+    .profile{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+    .avatar{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7bb1f8);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .meta{font-size:13px}
+    .meta .name{font-weight:700}
+    .actions{margin-top:8px}
+    .btn{display:inline-block;padding:8px 12px;border-radius:6px;border:0;background:var(--accent);color:white;font-weight:700;margin-right:8px;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+
+    .detail{margin-top:12px;flex:1;display:flex;flex-direction:column;gap:10px}
+    .field{display:flex;gap:12px;align-items:flex-start}
+    .label{width:110px;color:var(--muted);font-weight:600}
+    .value{flex:1;background:#fbfbfe;border:1px dashed var(--border);padding:10px;border-radius:6px;min-height:36px}
+    .chips{display:flex;gap:8px;align-items:center}
+    .chip{padding:6px 10px;border-radius:16px;border:1px solid var(--border);font-size:13px}
+
+    /* RIGHT NOTES */
+    .notes{background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border);height:640px}
+    .notes h4{margin-top:0;color:var(--muted)}
+    .notes p{line-height:1.5;color:#333}
+
+    /* Responsive */
+    @media(max-width:980px){.container{grid-template-columns:1fr;max-width:760px}header.full{grid-column:1/2} .notes{order:3} }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header class="full">
+      <div class="header-left">
+        <div class="title">SICFOR - catálogo de cursos</div>
+        <div class="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35" stroke="#9AA7C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#9AA7C7" stroke-width="2"/></svg>
+          <input id="search" placeholder="Buscar..." />
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="profile-inline">
+          <div class="avatar">AD</div>
+          <div class="meta">
+            <div class="name">Administrador</div>
+            <div style="font-size:13px;color:var(--muted)">Rol: <strong>Admin / Profesor</strong></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <aside class="sidebar">
+      <h3>Cursos</h3>
+      <div class="course-list" id="courseList">
+     
+      </div>
+      <div class="pager">◀ Páginas ▶</div>
+    </aside>
+
+    <main class="main">
+      <div class="profile">
+        
+        <div style="margin-left:auto" class="actions">
+          <button class="btn" id="btnAgregar">Agregar</button>
+          <button class="btn ghost" id="btnEditar">Editar</button>
+          <button class="btn ghost" id="btnEliminar">Eliminar</button>
+        </div>
+      </div>
+
+      <div class="detail">
+        <div class="field">
+          <div class="label">Título:</div>
+          <div class="value" id="titulo">Selecciona un curso en la lista de la izquierda para ver su detalle.</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Descripción:</div>
+          <div class="value" id="descripcion">-</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Requisitos:</div>
+          <div class="value" id="requisitos">-</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Duración:</div>
+          <div class="value" id="duracion">-</div>
+        </div>
+
+        <div class="field">
+          <div class="label">Modalidad:</div>
+          <div class="value chips" id="modalidad">
+            <div class="chip">Virtual</div>
+            <div class="chip">Presencial</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+
+  </div>
+
+  <script>
+    // Datos de ejemplo
+    const cursos = [
+      {id:1,titulo:'Curso 1 - Introducción a HTML',descripcion:'Aprende las bases de HTML: etiquetas, estructura y buenas prácticas.',requisitos:'Ninguno',duracion:'8 horas',modalidad:['Virtual']},
+      {id:2,titulo:'Curso 2 - CSS básico',descripcion:'Estilos con CSS: selectores, box model y layout.',requisitos:'Conocimientos básicos de HTML',duracion:'10 horas',modalidad:['Virtual','Presencial']},
+      {id:3,titulo:'Curso 3 - JavaScript básico',descripcion:'Variables, funciones y manipulación del DOM.',requisitos:'HTML y CSS básicos',duracion:'12 horas',modalidad:['Virtual']},
+      {id:4,titulo:'Curso 4 - Backend con Java',descripcion:'Fundamentos de Java para backend y APIs.',requisitos:'Programación básica',duracion:'20 horas',modalidad:['Presencial']},
+      {id:5,titulo:'Curso 5 - Diseño UX',descripcion:'Principios de usabilidad y diseño de interfaces.',requisitos:'Ganas de aprender',duracion:'6 horas',modalidad:['Virtual','Presencial']},
+      {id:6,titulo:'Curso 6 - Bases de datos',descripcion:'Modelado, SQL y consultas básicas.',requisitos:'Lógica de programación',duracion:'14 horas',modalidad:['Virtual']},
+      {id:7,titulo:'Curso 7 - DevOps introducción',descripcion:'CI/CD, contenedores y despliegue.',requisitos:'Conocimientos previos de desarrollo',duracion:'16 horas',modalidad:['Virtual']}
+    ];
+
+    const listEl = document.getElementById('courseList');
+    const tituloEl = document.getElementById('titulo');
+    const descEl = document.getElementById('descripcion');
+    const reqEl = document.getElementById('requisitos');
+    const durEl = document.getElementById('duracion');
+    const modalEl = document.getElementById('modalidad');
+    const searchInput = document.getElementById('search');
+
+    function renderList(filter=''){
+      listEl.innerHTML='';
+      const filtered = cursos.filter(c=>c.titulo.toLowerCase().includes(filter.toLowerCase()));
+      filtered.forEach(c=>{
+        const div = document.createElement('div');
+        div.className='course-item';
+        div.textContent = c.titulo;
+        div.onclick = ()=>selectCourse(c.id,div);
+        listEl.appendChild(div);
+      });
+      if(filtered.length===0){listEl.innerHTML='<div style="color:var(--muted);padding:8px">No hay cursos</div>'}
+    }
+
+    let selectedId = null;
+    function selectCourse(id,el){
+      selectedId = id;
+      document.querySelectorAll('.course-item').forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      const c = cursos.find(x=>x.id===id);
+      tituloEl.textContent = c.titulo;
+      descEl.textContent = c.descripcion;
+      reqEl.textContent = c.requisitos;
+      durEl.textContent = c.duracion;
+      modalEl.innerHTML = '';
+      c.modalidad.forEach(m=>{const span=document.createElement('div');span.className='chip';span.textContent=m;modalEl.appendChild(span)});
+    }
+
+    searchInput.addEventListener('input',e=>renderList(e.target.value));
+    // botones (simples alertas demo)
+    document.getElementById('btnAgregar').addEventListener('click',()=>alert('Función Agregar (implementar)'))
+    document.getElementById('btnEditar').addEventListener('click',()=>{
+      if(!selectedId) return alert('Selecciona un curso para editar');
+      alert('Función Editar para curso ID: '+selectedId);
+    })
+    document.getElementById('btnEliminar').addEventListener('click',()=>{
+      if(!selectedId) return alert('Selecciona un curso para eliminar');
+      if(confirm('¿Eliminar curso seleccionado?')){
+        const idx = cursos.findIndex(c=>c.id===selectedId);
+        if(idx>-1){cursos.splice(idx,1);renderList();tituloEl.textContent='Selecciona un curso en la lista de la izquierda para ver su detalle.';descEl.textContent='-';reqEl.textContent='-';durEl.textContent='-';modalEl.innerHTML='';selectedId=null}
+      }
+    })
+
+    // inicializar
+    renderList();
+  </script>
+
+</body>
+</html>
