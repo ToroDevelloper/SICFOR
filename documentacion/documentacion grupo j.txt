@@ -7,7 +7,7 @@
 Módulo completamente independiente para la gestión de tickets de soporte técnico y mesa de ayuda. Permite a los usuarios crear, visualizar, responder y gestionar tickets de manera intuitiva y eficiente.
 
 ## ✨ Características Principales
-
+ 
 ### 🎯 Funcionalidades Implementadas
 
 - ✅ **CRUD Completo de Tickets**
