@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil del Estudiante - SICFOR</title>
+</head>
+<body>
+  <header>
+    <h1>SICFOR - Registro y Gestión de Estudiantes</h1>
+    <p>Módulo de Estudiantes</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="../../index.html">Inicio</a></li>
+      <li><a href="lista.html">Lista de Estudiantes</a></li>
+      <li><a href="registro.html">Registro</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <button type="button" onclick="window.location.href='lista.html'">← Atrás</button>
+
+    <h2>Perfil del Estudiante</h2>
+
+    <article>
+      <section>
+        <h3>Fotografía</h3>
+        <img id="fotoEstudiante" src="https://via.placeholder.com/150" alt="Foto del estudiante">
+        <br>
+        <button type="button">Editar Foto</button>
+      </section>
+
+      <section>
+        <h3>Información Personal</h3>
+        <dl>
+          <dt>Nombres y Apellidos:</dt>
+          <dd id="nombreCompleto">-</dd>
+
+          <dt>Tipo de Documento:</dt>
+          <dd id="tipoDocumento">-</dd>
+
+          <dt>Número de Documento:</dt>
+          <dd id="numeroDocumento">-</dd>
+
+          <dt>Fecha de Nacimiento:</dt>
+          <dd id="fechaNacimiento">-</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h3>Lugar de Nacimiento</h3>
+        <dl>
+          <dt>Departamento de Nacimiento:</dt>
+          <dd id="departamentoNacimiento">-</dd>
+
+          <dt>Municipio de Nacimiento:</dt>
+          <dd id="municipioNacimiento">-</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h3>Lugar de Residencia</h3>
+        <dl>
+          <dt>Departamento de Residencia:</dt>
+          <dd id="departamentoResidencia">-</dd>
+
+          <dt>Municipio de Residencia:</dt>
+          <dd id="municipioResidencia">-</dd>
+
+          <dt>Dirección:</dt>
+          <dd id="direccion">-</dd>
+        </dl>
+      </section>
+
+      <section>
+        <h3>Información de Contacto</h3>
+        <dl>
+          <dt>Correo Electrónico:</dt>
+          <dd id="correoElectronico">-</dd>
+
+          <dt>Teléfono / Celular:</dt>
+          <dd id="celular">-</dd>
+        </dl>
+      </section>
+
+      <section>
+        <button type="button">Editar Información</button>
+        <button type="button">Eliminar Estudiante</button>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>Registro y Gestión de Estudiantes | SICFOR &copy; 2025</p>
+  </footer>
+</body>
+</html>
