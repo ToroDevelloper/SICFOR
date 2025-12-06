@@ -2,72 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Estudiantes - SICFOR</title>
+  <title>Lista de Estudiantes</title>
+  <link rel="stylesheet" href="../css/lista.css">
 </head>
 <body>
-  <header>
-    <h1>SICFOR - Registro y Gestión de Estudiantes</h1>
-    <p>Módulo de Estudiantes</p>
-  </header>
+  <h1>Lista de Estudiantes</h1>
 
-  <nav>
-    <ul>
-      <li><a href="../../index.html">Inicio</a></li>
-      <li><a href="lista.html">Lista de Estudiantes</a></li>
-      <li><a href="registro.html">Registro</a></li>
-    </ul>
-  </nav>
+  <!-- Contenedor donde se renderizará la lista -->
+  <ul id="lista-estudiantes"></ul>
 
-  <main>
-    <h2>Lista de Estudiantes</h2>
+  <!-- Botón para ir al registro -->
+  <a href="registro.html">Registrar nuevo estudiante</a>
 
-    <section>
-      <label for="busqueda">Buscar estudiante:</label>
-      <input type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identificación">
-      <button type="button">Buscar</button>
-    </section>
+  <!-- Script de conexión -->
+  <script src="../js/index.js"></script>
+  <script>
+    // Llamamos la función que ya definimos en index.js
+    cargarEstudiantes().then(estudiantes => {
+      const lista = document.getElementById('lista-estudiantes');
+      lista.innerHTML = '';
 
-    <section>
-      <table>
-        <thead>
-          <tr>
-            <th>Foto</th>
-            <th>Nombre Completo</th>
-            <th>Tipo de Documento</th>
-            <th>Número</th>
-            <th>Email</th>
-            <th>Celular</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="tablaEstudiantes">
-          <tr>
-            <td>
-              <img src="https://via.placeholder.com/50" alt="Foto estudiante">
-            </td>
-            <td>Juan Pérez García</td>
-            <td>CC</td>
-            <td>1234567890</td>
-            <td>juan.perez@example.com</td>
-            <td>3001234567</td>
-            <td>
-              <button type="button" onclick="window.location.href='perfil.html'">Ver Perfil</button>
-              <button type="button">Editar</button>
-              <button type="button">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section>
-      <button type="button" onclick="window.location.href='registro.html'">Registrar Nuevo Estudiante</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>Registro y Gestión de Estudiantes | SICFOR &copy; 2025</p>
-  </footer>
+      estudiantes.forEach(est => {
+        const item = document.createElement('li');
+        // Link hacia perfil.html con el id del estudiante
+        item.innerHTML = `
+          <a href="perfil.html?id=${est.id}">
+            ${est.nombres} ${est.apellidos} - ${est.email}
+          </a>
+        `;
+        lista.appendChild(item);
+      });
+    }).catch(err => {
+      console.error(err);
+      document.getElementById('lista-estudiantes').innerHTML = '<li>Error al cargar estudiantes</li>';
+    });
+  </script>
 </body>
 </html>

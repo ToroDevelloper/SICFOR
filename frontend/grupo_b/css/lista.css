@@ -1,0 +1,407 @@
+/* lista.css - Estilos para Lista de Estudiantes */
+
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Encabezado principal */
+h1 {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  border-radius: 2px;
+}
+
+/* Contenedor de la lista */
+#lista-estudiantes {
+  width: 100%;
+  max-width: 1000px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  border: 1px solid #e1e8ed;
+}
+
+/* Encabezado de la lista */
+#lista-estudiantes::before {
+  content: '📚 Listado de Estudiantes Registrados';
+  display: block;
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid #1a252f;
+  position: relative;
+  overflow: hidden;
+}
+
+#lista-estudiantes::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+/* Items de la lista */
+#lista-estudiantes li {
+  list-style: none;
+  border-bottom: 1px solid #ecf0f1;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#lista-estudiantes li:last-child {
+  border-bottom: none;
+}
+
+#lista-estudiantes li:hover {
+  background-color: #f8fbfe;
+  transform: translateX(5px);
+}
+
+#lista-estudiantes li:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #3498db, #2980b9);
+}
+
+/* Enlaces de estudiantes */
+#lista-estudiantes li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 1.5rem;
+  text-decoration: none;
+  color: #34495e;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+#lista-estudiantes li a:hover {
+  color: #2980b9;
+}
+
+/* Contenido del enlace */
+#lista-estudiantes li a::before {
+  content: '👤';
+  margin-right: 1rem;
+  font-size: 1.1rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+#lista-estudiantes li a:hover::before {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Información del estudiante */
+#lista-estudiantes li a {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+#lista-estudiantes li a::after {
+  content: '→';
+  color: #95a5a6;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+#lista-estudiantes li a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Nombres y apellidos */
+#lista-estudiantes li a {
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+#lista-estudiantes li a span:nth-child(1) {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* Email */
+#lista-estudiantes li a span:nth-child(2) {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+/* Estados de la lista */
+#lista-estudiantes:empty::before {
+  content: '📚 Listado de Estudiantes Registrados';
+}
+
+#lista-estudiantes:empty::after {
+  content: 'No hay estudiantes registrados aún.';
+  display: block;
+  padding: 3rem;
+  text-align: center;
+  color: #95a5a6;
+  font-style: italic;
+  font-size: 1.1rem;
+  background: #f8f9fa;
+}
+
+/* Mensaje de error */
+#lista-estudiantes li:only-child {
+  text-align: center;
+  color: #e74c3c;
+  font-weight: 500;
+  padding: 2rem;
+}
+
+#lista-estudiantes li:only-child::before {
+  display: none;
+}
+
+/* Botón de registrar */
+a[href="registro.html"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+a[href="registro.html"]::before {
+  content: '➕';
+  font-size: 1.2rem;
+}
+
+a[href="registro.html"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+a[href="registro.html"]:active {
+  transform: translateY(-1px);
+}
+
+/* Indicador de carga */
+#lista-estudiantes.loading::after {
+  content: 'Cargando estudiantes...';
+  display: block;
+  padding: 3rem;
+  text-align: center;
+  color: #3498db;
+  font-style: italic;
+  position: relative;
+}
+
+#lista-estudiantes.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e8f4fc;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Contador de estudiantes */
+#lista-estudiantes::before {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#lista-estudiantes::after {
+  content: attr(data-count) ' estudiantes';
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.8;
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  #lista-estudiantes li a {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  
+  #lista-estudiantes li a span:nth-child(2) {
+    text-align: left;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    padding-left: 1.8rem;
+  }
+  
+  #lista-estudiantes::before {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  
+  a[href="registro.html"] {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  #lista-estudiantes {
+    border-radius: 8px;
+  }
+  
+  #lista-estudiantes::before {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+  
+  #lista-estudiantes li a {
+    padding: 0.9rem;
+  }
+  
+  a[href="registro.html"] {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Estados alternos para items */
+#lista-estudiantes li:nth-child(even) {
+  background-color: #fafdfe;
+}
+
+#lista-estudiantes li:nth-child(even):hover {
+  background-color: #f0f8ff;
+}
+
+/* Efecto para nuevo estudiante */
+#lista-estudiantes li.new-student {
+  animation: highlight 2s ease-out;
+}
+
+@keyframes highlight {
+  0% {
+    background-color: rgba(52, 152, 219, 0.2);
+    transform: translateX(-10px);
+  }
+  100% {
+    background-color: transparent;
+    transform: translateX(0);
+  }
+}
+
+/* Scroll personalizado */
+#lista-estudiantes {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+#lista-estudiantes::-webkit-scrollbar {
+  width: 8px;
+}
+
+#lista-estudiantes::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#lista-estudiantes::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3498db, #2980b9);
+  border-radius: 4px;
+}
+
+#lista-estudiantes::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2980b9, #1c6ea4);
+}
+
+/* Adaptación para cuando hay pocos estudiantes */
+#lista-estudiantes:has(li:only-child) {
+  max-height: none;
+  overflow: visible;
+}
