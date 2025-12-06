@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfil del Estudiante - SICFOR</title>
+  <link rel="stylesheet" href="../css/perfil.css">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <header>
@@ -13,7 +16,6 @@
 
   <nav>
     <ul>
-      <li><a href="../../index.html">Inicio</a></li>
       <li><a href="lista.html">Lista de Estudiantes</a></li>
       <li><a href="registro.html">Registro</a></li>
     </ul>
@@ -23,14 +25,6 @@
     <button type="button" onclick="window.location.href='lista.html'">← Atrás</button>
 
     <h2>Perfil del Estudiante</h2>
-
-    <article>
-      <section>
-        <h3>Fotografía</h3>
-        <img id="fotoEstudiante" src="https://via.placeholder.com/150" alt="Foto del estudiante">
-        <br>
-        <button type="button">Editar Foto</button>
-      </section>
 
       <section>
         <h3>Información Personal</h3>
@@ -86,8 +80,8 @@
       </section>
 
       <section>
-        <button type="button">Editar Información</button>
-        <button type="button">Eliminar Estudiante</button>
+        <button type="button" id="btnEditarInfo">Editar Información</button>
+        <button type="button" id="btnEliminar">Eliminar Estudiante</button>
       </section>
     </article>
   </main>
@@ -95,5 +89,66 @@
   <footer>
     <p>Registro y Gestión de Estudiantes | SICFOR &copy; 2025</p>
   </footer>
+
+  <script src="../js/index.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    obtenerEstudiante(id).then(est => {
+      document.getElementById('nombreCompleto').textContent = est.nombres + ' ' + est.apellidos;
+      document.getElementById('tipoDocumento').textContent = est.tipo_documento;
+      document.getElementById('numeroDocumento').textContent = est.numero_identificacion;
+      document.getElementById('fechaNacimiento').textContent = est.fecha_nacimiento;
+      document.getElementById('departamentoNacimiento').textContent = est.departamento_nacimiento;
+      document.getElementById('municipioNacimiento').textContent = est.municipio_nacimiento;
+      document.getElementById('departamentoResidencia').textContent = est.departamento_residencia;
+      document.getElementById('municipioResidencia').textContent = est.municipio_residencia;
+      document.getElementById('direccion').textContent = est.direccion;
+      document.getElementById('correoElectronico').textContent = est.email;
+      document.getElementById('celular').textContent = est.celular;
+
+    }).catch(err => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al cargar estudiante'
+      });
+      console.error(err);
+    });
+
+    document.getElementById('btnEliminar').addEventListener('click', () => {
+      Swal.fire({
+        title: '¿Seguro que quieres eliminar este estudiante?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(result => {
+        if (result.isConfirmed) {
+          eliminarEstudiante(id).then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Eliminado',
+              text: 'Estudiante eliminado correctamente'
+            }).then(() => {
+              window.location.href = 'lista.html';
+            });
+          }).catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al eliminar estudiante'
+            });
+            console.error(err);
+          });
+        }
+      });
+    });
+
+    document.getElementById('btnEditarInfo').addEventListener('click', () => {
+      window.location.href = `registro.html?id=${id}`;
+    });
+  </script>
 </body>
 </html>

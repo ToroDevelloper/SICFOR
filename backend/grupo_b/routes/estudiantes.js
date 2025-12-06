@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router(); // importar 
 const pool = require('../config/db');
 const validarEstudiante = require('../middleware/validarEstudiante');
 
@@ -47,7 +47,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', validarEstudiante, async (req, res) => {
   const {
-    fotografia,
     nombres,
     apellidos,
     tipo_documento,
@@ -64,7 +63,6 @@ router.post('/', validarEstudiante, async (req, res) => {
   } = req.body;
 
   try {
-    // 🔍 Validar duplicados por CC o email
     const [exists] = await pool.promise().query(
       'SELECT id FROM estudiantes WHERE numero_identificacion = ? OR email = ?',
       [numero_identificacion, email]
@@ -74,15 +72,13 @@ router.post('/', validarEstudiante, async (req, res) => {
       return res.status(400).json({ error: 'Estudiante ya registrado' });
     }
 
-    // ✅ Insertar si no hay duplicados
     const [result] = await pool.promise().query(
       `INSERT INTO estudiantes 
-      (fotografia, nombres, apellidos, tipo_documento, numero_identificacion, fecha_nacimiento,
+      ( nombres, apellidos, tipo_documento, numero_identificacion, fecha_nacimiento,
        departamento_nacimiento, municipio_nacimiento, departamento_residencia, municipio_residencia,
        zona, direccion, email, celular)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        fotografia,
         nombres,
         apellidos,
         tipo_documento,
@@ -112,7 +108,6 @@ router.post('/', validarEstudiante, async (req, res) => {
 router.put('/:id', validarEstudiante, async (req, res) => {
   const { id } = req.params;
   const {
-    fotografia,
     nombres,
     apellidos,
     tipo_documento,
@@ -129,7 +124,6 @@ router.put('/:id', validarEstudiante, async (req, res) => {
   } = req.body;
 
   try {
-    // 🔍 Validar duplicados: que el CC o email no pertenezcan a otro estudiante
     const [exists] = await pool.promise().query(
       'SELECT id FROM estudiantes WHERE (numero_identificacion = ? OR email = ?) AND id <> ?',
       [numero_identificacion, email, id]
@@ -139,10 +133,8 @@ router.put('/:id', validarEstudiante, async (req, res) => {
       return res.status(400).json({ error: 'Ya existe otro estudiante con ese documento o email' });
     }
 
-    // ✅ Actualizar si no hay duplicados
     const [result] = await pool.promise().query(
-      `UPDATE estudiantes SET 
-        fotografia = ?, 
+      `UPDATE estudiantes SET  
         nombres = ?, 
         apellidos = ?, 
         tipo_documento = ?, 
@@ -158,7 +150,6 @@ router.put('/:id', validarEstudiante, async (req, res) => {
         celular = ?
       WHERE id = ?`,
       [
-        fotografia,
         nombres,
         apellidos,
         tipo_documento,
@@ -208,5 +199,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;// exportar archivos 
 

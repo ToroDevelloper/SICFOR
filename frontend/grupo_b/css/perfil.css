@@ -1,0 +1,302 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* Navegación */
+nav {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+nav a:hover {
+  background-color: #e8f4fc;
+  color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Main content */
+main {
+  flex: 1;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* Botón Atrás */
+main > button:first-of-type {
+  background-color: #7f8c8d;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+main > button:first-of-type:hover {
+  background-color: #6c7b7d;
+  transform: translateX(-3px);
+}
+
+/* Título principal */
+main h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px solid #3498db;
+  display: inline-block;
+}
+
+/* Secciones del perfil */
+section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+section h3 {
+  color: #2980b9;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+/* Lista de definición */
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1rem 1.5rem;
+}
+
+dt {
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: right;
+  padding-right: 1rem;
+  position: relative;
+}
+
+dt::after {
+  content: ":";
+  position: absolute;
+  right: 0;
+}
+
+dd {
+  color: #34495e;
+  padding-left: 1rem;
+  border-left: 2px solid #ecf0f1;
+}
+
+/* Información personal resaltada */
+#nombreCompleto {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Sección de botones */
+main > section:last-of-type {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+main > section:last-of-type:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botones de acción */
+#btnEditarInfo, #btnEliminar {
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#btnEditarInfo {
+  background-color: #3498db;
+  color: white;
+}
+
+#btnEditarInfo:hover {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+#btnEliminar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+#btnEliminar:hover {
+  background-color: #c0392b;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Footer */
+footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  dl {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  dt {
+    text-align: left;
+    padding-right: 0;
+    border-bottom: 1px dashed #ecf0f1;
+    padding-bottom: 0.3rem;
+  }
+  
+  dt::after {
+    content: "";
+  }
+  
+  dd {
+    border-left: none;
+    padding-left: 0;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #f8f9fa;
+  }
+  
+  main > section:last-of-type {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #btnEditarInfo, #btnEliminar {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  main h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 0 1rem;
+    margin: 1rem auto;
+  }
+  
+  section {
+    padding: 1.2rem;
+  }
+  
+  header, footer {
+    padding: 1.2rem;
+  }
+}
+
+/* Estilos para los datos cargados */
+dd:not(:empty) {
+  background-color: #f8f9fa;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  border-left: 3px solid #3498db;
+}
