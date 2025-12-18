@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json())
 
 // Servir archivos estáticos desde la carpeta frontend
-app.use(express.static(path.join(__dirname, '../../frontend/grupo_d')))
+app.use(express.static(path.join(__dirname, '../../frontend')))
 
 // Crear conexión usando variables de entorno
 const conexion = mysql.createConnection({
@@ -81,10 +81,49 @@ app.post('/api/cursos', (req, res) => {
     })
 })
 
+app.delete('/api/cursos/:id', (req, res) => {
+    const { id } = req.params
+    const sql = 'DELETE FROM cursos WHERE id = ?'
+    conexion.query(sql, [id], (error, result) => {
+        if (error) {
+            console.error('Error al eliminar curso:', error)
+            return res.status(500).json({ error: 'Error al eliminar curso' })
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Curso no encontrado' })
+        }
+        res.json({ success: true })
+    })
+})
+
+app.get('/api/estudiantes/list', (req, res) => {
+    const sql = 'SELECT id, nombres FROM estudiantes'
+    conexion.query(sql, (error, results) => {
+        if (error) {
+            console.error('Error al obtener lista de estudiantes:', error)
+            return res.status(500).json({ error: 'Error al obtener lista de estudiantes' })
+        }
+        res.json(results)
+    })
+})
+
+app.post('/api/estudiantes', (req, res) => {
+    const { id_estudiante, id_curso } = req.body
+    const sql = 'INSERT INTO inscripciones (id_estudiante, id_curso) VALUES (?, ?)'
+    conexion.query(sql, [id_estudiante, id_curso], (error, result) => {
+        if (error) {
+            console.error('Error al inscribir estudiante:', error)
+            return res.status(500).json({ error: 'Error al inscribir estudiante' })
+        }
+        res.json({ id: result.insertId, id_estudiante, id_curso })
+    })
+})
+
 // Iniciar servidor
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`)
+    console.log(`Accede a: http://localhost:${PORT}/grupo_d/curso.html`)
 })
 
 module.exports = { conexion, app }
