@@ -156,7 +156,7 @@
   Añadir
 </button>
 
-<button class="edit" onclick="window.location.href='curso_edit.html'">
+<button class="edit" onclick="editarCurso()">
   Editar
 </button>
             <button class="delete">Eliminar</button>
@@ -261,6 +261,16 @@
         <p><strong>Unidades de formación:</strong> ${unidades}</p>
         <p><strong>Modalidad:</strong> ${modalidad}</p>
       `
+    }
+
+    function editarCurso() {
+      const selected = document.querySelector('.course-item.selected')
+      const id = selected?.getAttribute('data-curso-id')
+      if (!id) {
+        alert('Selecciona un curso de la lista')
+        return
+      }
+      window.location.href = `curso_edit.html?id=${id}`
     }
 
     // Eliminar curso seleccionado (usa el detalle actual)

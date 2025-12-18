@@ -235,22 +235,86 @@ textarea.form-control {
               </select>
             </div>
           </div>
-        </form>
-      </div>
 
-      <div class="card mt-4">
-        <h6 class="card-title">Unidades de formación</h6>
-        <div id="unitsList" class="list-group mb-2">
-          <label class="list-group-item">
-            <input type="text" name="unidad1" id="unidad1">
-          </label>
-        </div>
-      </div>
+          <div class="card mt-4">
+            <h6 class="card-title">Unidades de formación</h6>
+            <div id="unitsList" class="list-group mb-2">
+              <label class="list-group-item">
+                <input type="text" name="unidad1" id="unidad1">
+              </label>
+            </div>
+          </div>
+        </form>
 
       <div class="d-flex justify-content-end gap-2 mt-5">
         <a href="curso.html" class="btn btn-outline-secondary">Cancelar</a>
-        <button id="btnSubmit" type="submit" class="btn btn-primary">Guardar</button>
+        <button id="btnSubmit" type="submit" form="cursoForm" class="btn btn-primary">Guardar</button>
       </div>
     </main>
+
+    <script>
+      const API = 'http://localhost:8080'
+      const urlParams = new URLSearchParams(window.location.search)
+      const cursoId = urlParams.get('id')
+
+      if (!cursoId) {
+        alert('ID de curso no proporcionado')
+        window.location.href = 'curso.html'
+      }
+
+      // Cargar datos del curso
+      async function loadCurso() {
+        console.log('Cargando curso con ID:', cursoId)
+        try {
+          const res = await fetch(`${API}/api/cursos/${cursoId}`)
+          if (!res.ok) throw new Error(`HTTP ${res.status}`)
+          const curso = await res.json()
+          console.log('Curso cargado:', curso)
+          fillForm(curso)
+        } catch (err) {
+          console.error('Error cargando curso:', err)
+          alert('Error cargando curso')
+        }
+      }
+
+      function fillForm(curso) {
+        document.getElementById('cursoId').value = curso.id
+        document.getElementById('titulo').value = curso.titulo
+        document.getElementById('descripcion').value = curso.descripcion
+        document.getElementById('duracion').value = curso.duracion
+        document.getElementById('modalidad').value = curso.modalidad
+        document.getElementById('unidad1').value = curso.unidades_formacion || ''
+      }
+
+      // Manejar submit
+      document.getElementById('cursoForm').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        console.log('Submit triggered')
+        const formData = new FormData(e.target)
+        const data = {
+          titulo: formData.get('titulo'),
+          descripcion: formData.get('descripcion'),
+          duracion: formData.get('duracion'),
+          modalidad: formData.get('modalidad'),
+          unidades_formacion: formData.get('unidad1')
+        }
+        console.log('Datos a enviar:', data)
+
+        try {
+          const res = await fetch(`${API}/api/cursos/${cursoId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          if (!res.ok) throw new Error(await res.text())
+          alert('Curso actualizado')
+          window.location.href = 'curso.html'
+        } catch (err) {
+          alert('Error actualizando: ' + err.message)
+        }
+      })
+
+      loadCurso()
+    </script>
   </body>
 </html>

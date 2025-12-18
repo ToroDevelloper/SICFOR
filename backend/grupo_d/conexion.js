@@ -119,6 +119,37 @@ app.post('/api/estudiantes', (req, res) => {
     })
 })
 
+app.get('/api/cursos/:id', (req, res) => {
+    const { id } = req.params
+    const sql = 'SELECT * FROM cursos WHERE id = ?'
+    conexion.query(sql, [id], (error, results) => {
+        if (error) {
+            console.error('Error al obtener curso:', error)
+            return res.status(500).json({ error: 'Error al obtener curso' })
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Curso no encontrado' })
+        }
+        res.json(results[0])
+    })
+})
+
+app.put('/api/cursos/:id', (req, res) => {
+    const { id } = req.params
+    const { titulo, descripcion, duracion, modalidad, unidades_formacion } = req.body
+    const sql = 'UPDATE cursos SET titulo = ?, descripcion = ?, duracion = ?, modalidad = ?, unidades_formacion = ? WHERE id = ?'
+    conexion.query(sql, [titulo, descripcion, duracion, modalidad, unidades_formacion, id], (error, result) => {
+        if (error) {
+            console.error('Error al actualizar curso:', error)
+            return res.status(500).json({ error: 'Error al actualizar curso' })
+        }
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Curso no encontrado' })
+        }
+        res.json({ id, titulo, descripcion, duracion, modalidad, unidades_formacion })
+    })
+})
+
 // Iniciar servidor
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
