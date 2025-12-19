@@ -1,0 +1,15 @@
+// POST /api/tickets/:id/reabrir
+app.post('/api/tickets/:id/reabrir', async (req, res) => {
+  const id = Number(req.params.id)
+  try {
+    await pool.query(
+      `UPDATE tickets SET estado = 'Abierto', fecha_cierre = NULL WHERE id = ?`,
+      [id]
+    )
+    const [rows] = await pool.query('SELECT * FROM tickets WHERE id = ?', [id])
+    res.json(toClientTicket(rows[0], []))
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: 'Error al reabrir ticket' })
+  }
+})

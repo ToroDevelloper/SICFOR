@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICFOR - Dashboard de Integración</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>SICFOR</h1>
+        <p>Sistema Integral de Gestión - Dashboard de Integración</p>
+    </header>
+
+    <main>
+        <div class="dashboard-grid">
+            <!-- Grupo A: Gestión de Usuarios -->
+            <a href="frontend/grupo_a/agregar_usuario.html" class="card">
+                <div class="card-header" style="background-color: #e74c3c;">A</div>
+                <div class="card-body">
+                    <h2>Gestión de Usuarios</h2>
+                    <p>Módulo de administración de perfiles y roles de usuario.</p>
+                    <div class="card-status">
+                        <span class="status-indicator status-active"></span> Integrado
+                    </div>
+                </div>
+            </a>
+
+            <!-- Grupo B: Estudiantes -->
+            <a href="frontend/grupo_b/html/lista.html" class="card">
+                <div class="card-header" style="background-color: #3498db;">B</div>
+                <div class="card-body">
+                    <h2>Módulo Estudiantes</h2>
+                    <p>Registro, listado y perfil de estudiantes.</p>
+                    <div class="card-status">
+                        <span class="status-indicator status-active"></span> Integrado
+                    </div>
+                </div>
+            </a>
+
+            <!-- Grupo D: Cursos -->
+            <a href="frontend/grupo_d/curso.html" class="card">
+                <div class="card-header" style="background-color: #9b59b6;">D</div>
+                <div class="card-body">
+                    <h2>Gestión de Cursos</h2>
+                    <p>Creación, edición e inscripción de cursos.</p>
+                    <div class="card-status">
+                        <span class="status-indicator status-active"></span> Integrado
+                    </div>
+                </div>
+            </a>
+
+            <!-- Grupo J: Tickets / Mesa de Ayuda -->
+            <a href="frontend/grupo_j/index.html" class="card">
+                <div class="card-header" style="background-color: #2ecc71;">J</div>
+                <div class="card-body">
+                    <h2>Mesa de Ayuda</h2>
+                    <p>Sistema de tickets y soporte (Vanilla JS).</p>
+                    <div class="card-status">
+                        <span class="status-indicator status-active"></span> Integrado
+                    </div>
+                </div>
+            </a>
+            
+             <!-- Grupo H: Base de Datos/Otros -->
+             <a href="frontend/grupo_h/grupoh.css" class="card" target="_blank">
+                <div class="card-header" style="background-color: #95a5a6;">H</div>
+                <div class="card-body">
+                    <h2>Recursos Grupo H</h2>
+                    <p>Archivos de estilos y configuración de base de datos.</p>
+                    <div class="card-status">
+                        <span class="status-indicator status-active"></span> Integrado
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SICFOR - Sistema Integral de Gestión</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
