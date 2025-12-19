@@ -77,7 +77,21 @@ app.post('/api/auth/login', async (req, res) => {
         }
 
         const usuario = usuarios[0];
-        const passwordValido = await bcrypt.compare(password, usuario.contraseña);
+        console.log('🔐 Usuario encontrado:', usuario.email);
+        console.log('🔐 Contraseña en BD (primeros 10 chars):', usuario.contraseña ? usuario.contraseña.substring(0, 10) : 'NULL');
+        console.log('🔐 Contraseña ingresada:', password);
+        
+        // Verificar si la contraseña está hasheada (bcrypt empieza con $2)
+        let passwordValido = false;
+        if (usuario.contraseña && usuario.contraseña.startsWith('$2')) {
+            // Contraseña hasheada con bcrypt
+            passwordValido = await bcrypt.compare(password, usuario.contraseña);
+        } else {
+            // Contraseña en texto plano (comparación directa)
+            passwordValido = (password === usuario.contraseña);
+        }
+        
+        console.log('🔐 Resultado validación:', passwordValido);
 
         if (!passwordValido) {
             return res.status(401).json({ success: false, error: 'Contraseña incorrecta' });
@@ -103,6 +117,28 @@ app.post('/api/auth/login', async (req, res) => {
     } catch (error) {
         console.error('❌ Error en login:', error);
         res.status(500).json({ success: false, error: 'Error del servidor' });
+    }
+});
+
+// ========== RUTA TEMPORAL: Resetear contraseña de usuario ==========
+app.post('/api/admin/reset-user-password', async (req, res) => {
+    const { email, newPassword } = req.body;
+    
+    if (!email || !newPassword) {
+        return res.status(400).json({ success: false, error: 'Email y nueva contraseña requeridos' });
+    }
+    
+    try {
+        const hash = await bcrypt.hash(newPassword, 10);
+        await authPool.query(
+            'UPDATE usuarios SET contraseña = ? WHERE email = ?',
+            [hash, email]
+        );
+        console.log(`✅ Contraseña actualizada para ${email}`);
+        res.json({ success: true, message: `Contraseña actualizada para ${email}` });
+    } catch (error) {
+        console.error('❌ Error:', error);
+        res.status(500).json({ success: false, error: 'Error al actualizar contraseña' });
     }
 });
 
