@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # Misc
 .DS_Store
+
+# Group C specific
+frontend/grupo_c/test
