@@ -1,15 +1,35 @@
 {
-  "name": "sicfor-tickets-grupo-j",
-  "private": true,
+  "name": "sicfor",
   "version": "1.0.0",
+  "description": "Este proyecto es un Sistema Integral de Gestión para un Centro de Formación y Cursos (SICFOR), desarrollado con Node.js, Express y MySQL. Incluye Módulo de Mesa de Ayuda y Soporte.",
+  "main": "app.js",
   "type": "module",
-  "description": "Módulo de Mesa de Ayuda y Soporte - Sistema Integral SICFOR - Grupo J",
   "scripts": {
-    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "vite": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToroDevelloper/SICFOR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToroDevelloper/SICFOR/issues"
+  },
+  "homepage": "https://github.com/ToroDevelloper/SICFOR#readme",
   "dependencies": {
+    "cloudinary": "^2.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "multer": "^2.0.2",
+    "mysql2": "^3.16.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.20.1"

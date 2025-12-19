@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Estudiantes - SICFOR</title>
+  <link rel="stylesheet" href="../css/lista.css">
+</head>
+<body>
+  <header>
+    <h1>SICFOR - Registro y Gestión de Estudiantes</h1>
+    <p>Módulo de Estudiantes</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="../../index.html">Inicio</a></li>
+      <li><a href="lista.html">Lista de Estudiantes</a></li>
+      <li><a href="registro.html">Registro</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Lista de Estudiantes</h2>
+
+    <section>
+      <label for="busqueda">Buscar estudiante:</label>
+      <input type="text" id="busqueda" name="busqueda" placeholder="Buscar por nombre o identificación">
+      <button type="button">Buscar</button>
+    </section>
+
+    <section>
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Nombre Completo</th>
+            <th>Tipo de Documento</th>
+            <th>Número</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaEstudiantes">
+          <tr>
+            <td colspan="7">Cargando estudiantes...</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <button type="button" onclick="window.location.href='registro.html'">Registrar Nuevo Estudiante</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Registro y Gestión de Estudiantes | SICFOR &copy; 2025</p>
+  </footer>
+  <script src="../js/crud.js"></script>
+</body>
+</html>

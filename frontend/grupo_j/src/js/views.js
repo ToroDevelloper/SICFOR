@@ -1,0 +1,5 @@
+export { renderLayout } from './views/layout.js'
+export { renderDashboard } from './views/dashboardView.js'
+export { renderCrearTicket } from './views/createTicketView.js'
+export { renderVerTicket } from './views/ticketDetailView.js'
+export { renderHistorial } from './views/historialView.js'
