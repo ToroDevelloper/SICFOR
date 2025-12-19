@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICFOR - Módulo de Asistencia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <span class="logo-text">SICFOR</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text">Asistencia</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="header-title-group">
+                    <h1 class="page-title">MÓDULO DE ASISTENCIA</h1>
+                    <p class="header-subtitle">Sistema SICFOR</p>
+                </div>
+                <span class="grupo-badge">Sistema Integral de Gestión para Centro de Formación - SICFOR</span>
+            </div>
+            <div class="header-right">
+                <div class="user-profile">
+                    <div class="user-icon">👤</div>
+                    <span class="user-name">Iniciar Sesión</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Current Session Section -->
+            <section class="session-section" id="currentSessionSection">
+                <div class="section-header">
+                    <h2>Sesión de hoy</h2>
+                    <div class="session-actions">
+                        <button class="btn btn-secondary" id="addSessionBtn">
+                            <span>➕</span> Agregar sesión
+                        </button>
+                    </div>
+                </div>
+
+                <div class="session-card" id="currentSessionCard">
+                    <div class="session-info">
+                        <div class="info-row">
+                            <span class="info-label">Curso:</span>
+                            <span class="info-value" id="sessionCurso">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha:</span>
+                            <span class="info-value" id="sessionFecha">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Hora:</span>
+                            <span class="info-value" id="sessionHora">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Docente:</span>
+                            <span class="info-value" id="sessionDocente">-</span>
+                        </div>
+                    </div>
+                    <div class="session-card-actions">
+                        <button class="btn btn-sm btn-secondary" id="editSessionBtn">Editar sesión</button>
+                        <button class="btn btn-sm btn-danger" id="deleteSessionBtn">Eliminar</button>
+                    </div>
+                </div>
+
+                <!-- Attendance List -->
+                <div class="attendance-section">
+                    <h3>Lista de asistencia</h3>
+                    <div class="attendance-table-wrapper">
+                        <table class="attendance-table">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Nombre</th>
+                                    <th>Presente</th>
+                                    <th>Justificación</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="attendance-summary">
+                        <div class="summary-card">
+                            <div class="summary-label">Presentes:</div>
+                            <div class="summary-value" id="presentesCount">0</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Tarde:</div>
+                            <div class="summary-value" id="tardeCount">0</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Faltas:</div>
+                            <div class="summary-value" id="faltasCount">0</div>
+                        </div>
+                    </div>
+
+                    <div class="attendance-actions">
+                        <button class="btn btn-primary" id="saveAttendanceBtn">
+                            <span>💾</span> Guardar asistencia
+                        </button>
+                        <button class="btn btn-secondary" id="viewHistoryBtn">
+                            <span>📊</span> Listar sesiones
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Session History Section -->
+            <section class="history-section" id="historySection" style="display: none;">
+                <div class="section-header">
+                    <h2>Historial de Sesiones</h2>
+                    <button class="btn btn-secondary" id="backToCurrentBtn">
+                        <span>←</span> Volver
+                    </button>
+                </div>
+
+                <div class="history-table-wrapper">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Curso</th>
+                                <th>Docente</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>📋 Módulo de Asistencia</h4>
+                    <p>Sistema Integral de Gestión para Centro de Formación (SICFOR)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SICFOR | Todos los derechos reservados</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Modal for Add/Edit Session -->
+    <div class="modal" id="sessionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Agregar Sesión</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="sessionForm">
+                    <div class="form-group">
+                        <label for="cursoInput">Curso</label>
+                        <input type="text" id="cursoInput" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaInput">Fecha</label>
+                        <input type="date" id="fechaInput" class="form-control" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="horaInicioInput">Hora Inicio</label>
+                            <input type="time" id="horaInicioInput" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="horaFinInput">Hora Fin</label>
+                            <input type="time" id="horaFinInput" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="docenteInput">Docente</label>
+                        <input type="text" id="docenteInput" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelModalBtn">Cancelar</button>
+                <button class="btn btn-primary" id="saveSessionBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
