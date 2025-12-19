@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema SICFOR - Retroalimentación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <h2>Evaluaciones y Calificaciones</h2>
+            <span class="group-tag">Grupo H</span>
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <strong>Juan Pérez</strong>
+                <small>Docente</small><br>
+                <small>juan.perez@sicfor.edu</small>
+            </div>
+            <div class="avatar">JP</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <ul>
+                <li><i class="fa-solid fa-house"></i> Inicio / Listado</li>
+                <li><i class="fa-solid fa-file-circle-plus"></i> Crear evaluación</li>
+                <li><i class="fa-solid fa-pen-to-square"></i> Registrar notas</li>
+                <li class="active"><i class="fa-solid fa-comments"></i> Retroalimentación</li>
+                <li><i class="fa-solid fa-chart-pie"></i> Reportes simples</li>
+            </ul>
+        </nav>
+
+        <section class="students-list">
+    <h3>Estudiantes</h3>
+    <div class="search-container">
+        <input type="text" placeholder="Buscar...">
+    </div>
+    
+    <div class="student-item active" onclick="loadStudent('AG')">
+        <div class="circle blue">AG</div>
+        <div class="info">
+            <strong>Ana García</strong>
+            <small>Pendiente revisión</small>
+        </div>
+    </div>
+
+    <div class="student-item" onclick="loadStudent('CL')">
+        <div class="circle dark">CL</div>
+        <div class="info">
+            <strong>Carlos López</strong>
+            <small>Completado</small>
+        </div>
+    </div>
+
+    <div class="student-item" onclick="loadStudent('MR')">
+        <div class="circle dark">MR</div>
+        <div class="info">
+            <strong>Maria Rodriguez</strong>
+            <small>Completado</small>
+        </div>
+    </div>
+</section>
+        </section>
+
+        <section class="detail-panel">
+            <div class="header-detail">
+                <div class="student-identity">
+                    <div class="circle big blue">AG</div>
+                    <div>
+                        <h2>Ana García</h2>
+                        <span>Código: 20231001</span>
+                    </div>
+                </div>
+                <button class="btn-notify" onclick="notifyStudent()"><i class="fa-solid fa-envelope"></i> Notificar</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Parcial Corte 1</h3>
+                    <div class="current-grade" id="displayGrade">0.0</div>
+                </div>
+
+                <div class="feedback-area">
+                    <label>Comentarios detallados:</label>
+                    <textarea id="commentInput" placeholder="Escribe aquí la retroalimentación..."></textarea>
+                    <button class="btn-save" onclick="saveComment()">Guardar Comentario</button>
+                </div>
+
+                <hr class="divider">
+
+                <div class="grade-edit-section">
+                    <h3>Nota</h3>
+                    <div class="grade-controls">
+                        <input type="number" id="newGrade" step="0.1" min="0" max="5" placeholder="0.0">
+                        <button class="btn-save-grade" onclick="saveGrade()">Guardar Nota</button>
+                    </div>
+                </div>
+
+                <div class="history-box">
+                    <h4>Historial</h4>
+                    <div id="historyList">
+                        <div class="history-item">
+                            <strong>18 noviembre, 10:30 AM</strong>
+                            <p>Se sugiere revisar la bibliografía del capítulo 3 para mejorar la argumentación téorica.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        Sistema SICFOR - Módulo de Evaluaciones y Calificaciones - Grupo H | © 2025 Universidad Uniputumayo
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

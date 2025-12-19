@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema SICFOR - Registro de Calificaciones</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-section">
+            <h1>Evaluaciones y Calificaciones</h1>
+            <span class="badge-grupo">Grupo H</span>
+        </div>
+        <div class="user-info">
+            <div class="user-text">
+                <strong class="user-name">Juan Pérez</strong><br>
+                <span class="user-role">Docente</span><br>
+                <span class="user-email">juan.perez@sicfor.edu</span>
+            </div>
+            <div class="user-avatar-circle">JP</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><i class="fas fa-home"></i> Inicio / Listado</li>
+                <li><i class="fas fa-plus-square"></i> Crear evaluación</li>
+                <li class="active"><i class="fas fa-edit"></i> Registrar notas</li>
+                <li><i class="fas fa-comment-dots"></i> Retroalimentación</li>
+                <li><i class="fas fa-file-alt"></i> Reportes simples</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div class="card-main-frame">
+                <div class="card-header">
+                    <h2 class="titulo-registro">Registro de Calificaciones</h2>
+                    <div class="controls">
+                        <div class="selectors-group">
+                            <select id="corte" class="custom-select">
+                                <option value="1">Corte 1</option>
+                                <option value="2">Corte 2</option>
+                                <option value="3">Corte 3</option>
+                            </select>
+                            <select id="taller" class="custom-select">
+                                <option>Taller Práctico</option>
+                                <option>Examen Final</option>
+                            </select>
+                        </div>
+                        <button id="btnGuardar" class="btn-save">
+                            <i class="fas fa-save"></i> Guardar Cambios
+                        </button>
+                    </div>
+                </div>
+
+                <table class="grades-table">
+                    <thead>
+                        <tr class="header-row-style">
+                            <th style="width: 50px;">#</th>
+                            <th>Estudiante</th>
+                            <th>Nota (0-5)</th>
+                            <th>Observación Corta</th>
+                            <th style="text-align: center;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        Sistema SICFOR - Módulo de Evaluaciones y Calificaciones - Grupo H<br>
+        © 2025 Universidad Uniputumayo
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
