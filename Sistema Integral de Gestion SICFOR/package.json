@@ -1,0 +1,17 @@
+{
+  "name": "sicfor-tickets-grupo-j",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Módulo de Mesa de Ayuda y Soporte - Sistema Integral SICFOR - Grupo J",
+  "scripts": {
+    "start": "node backend/server/index.js",
+    "dev": "node backend/server/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7"
+  }
+}
