@@ -19,7 +19,7 @@ const svg = soporteLabel.querySelector('svg');
 // Función para obtener instructor por ID desde la API
 async function fetchInstructorById(id) {
     try {
-        const response = await fetch(`http://localhost:8080/api/instructores/${id}`);
+        const response = await fetch(`/api/instructores/${id}`);
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
         }
@@ -145,7 +145,7 @@ formulario.addEventListener('submit', async (e) => {
         
         if (esEdicion && instructorId) {
             // Actualizar instructor existente (PUT)
-            response = await fetch(`http://localhost:8080/api/instructores/${instructorId}`, {
+            response = await fetch(`/api/instructores/${instructorId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -154,7 +154,7 @@ formulario.addEventListener('submit', async (e) => {
             });
         } else {
             // Crear nuevo instructor (POST)
-            response = await fetch('http://localhost:8080/api/instructores', {
+            response = await fetch('/api/instructores', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

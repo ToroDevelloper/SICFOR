@@ -15,7 +15,7 @@ async function loadInstructors() {
     showLoader();
     
     try {
-        const response = await fetch('http://localhost:8080/api/instructores');
+        const response = await fetch('/api/instructores');
         
         if (!response.ok) {
             throw new Error(`Error HTTP: ${response.status}`);
@@ -29,7 +29,7 @@ async function loadInstructors() {
             <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
                 <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #e74c3c; margin-bottom: 20px;"></i>
                 <p style="color: #e74c3c; font-weight: bold;">Error al cargar instructores</p>
-                <p style="color: #6c757d; margin-top: 10px;">Por favor, verifica que el servidor esté ejecutándose en http://localhost:8080</p>
+                <p style="color: #6c757d; margin-top: 10px;">Por favor, verifica que el servidor esté ejecutándose</p>
                 <button onclick="loadInstructors()" style="margin-top: 20px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">
                     Reintentar
                 </button>

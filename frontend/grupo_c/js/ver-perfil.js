@@ -1,7 +1,7 @@
 // Obtener instructor por ID desde la API
 async function fetchInstructorById(id) {
 	try {
-		const response = await fetch(`http://localhost:8080/api/instructores/${id}`);
+		const response = await fetch(`/api/instructores/${id}`);
 		if (!response.ok) {
 			throw new Error(`Error HTTP: ${response.status}`);
 		}
@@ -15,7 +15,7 @@ async function fetchInstructorById(id) {
 // Cambiar estado del instructor (solo actualiza el campo estado)
 async function cambiarEstadoInstructor(id, nuevoEstado) {
 	try {
-		const response = await fetch(`http://localhost:8080/api/instructores/${id}/estado`, {
+		const response = await fetch(`/api/instructores/${id}/estado`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
