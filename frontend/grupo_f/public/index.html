@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo F - Módulo de Pagos y Estados de Cuenta</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="web-app-container">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fas fa-chart-pie"></i>
+            <h1>Grupo F</h1>
+        </div>
+        <nav class="main-menu">
+            <a href="#" class="nav-item active" data-screen="home-screen">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+            <!-- Nueva pantalla Estado de Cuenta -->
+            <a href="#" class="nav-item" data-screen="estado-cuenta-screen">
+                <i class="fas fa-file-invoice-dollar"></i> Estado de Cuenta
+            </a>
+            <a href="#" class="nav-item" data-screen="register-payment-screen">
+                <i class="fas fa-money-check-alt"></i> Registrar Pago
+            </a>
+            <a href="#" class="nav-item" data-screen="transaction-history-screen">
+                <i class="fas fa-history"></i> Historial
+            </a>
+        </nav>
+        <div class="user-profile">
+            <div class="avatar-web">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info-web">
+                <p class="name">Admin</p>
+                <p class="role">Administrador</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <h2>Módulo de Pagos y Estados de Cuenta</h2>
+            <div class="topbar-actions">
+                <button><i class="fas fa-bell"></i></button>
+                <button><i class="fas fa-cog"></i></button>
+            </div>
+        </header>
+
+        <div class="screen-container">
+
+            <!-- HOME SCREEN -->
+            <section id="home-screen" class="screen active">
+                <div class="home-grid">
+                    <!-- Widget principal con Deuda Pendiente -->
+                    <div class="widget main-balance">
+                        <p>Deuda Pendiente Total</p>
+                        <span class="amount" id="deuda-pendiente">$0 COP</span>
+                        <button class="action-btn-primary" onclick="showScreen('register-payment-screen')">
+                            <i class="fas fa-plus"></i> Registrar Nuevo Pago
+                        </button>
+                    </div>
+
+                    <!-- Widget Total Pagado -->
+                    <div class="widget info-widget">
+                        <i class="fas fa-check-circle icon-big"></i>
+                        <h3>Total Pagado</h3>
+                        <p id="total-pagado">$0 COP</p>
+                    </div>
+                    <div class="widget info-widget">
+                        <i class="fas fa-clock icon-big"></i>
+                        <h3>Pagos Pendientes</h3>
+                        <p id="pagos-pendientes">0 transacciones</p>
+                    </div>
+
+                    <div class="widget quick-actions-web">
+                        <h3>Accesos Rápidos</h3>
+                        <div class="quick-link-list">
+                            <button onclick="showScreen('estado-cuenta-screen')"><i class="fas fa-file-invoice-dollar"></i> Ver Estado de Cuenta</button>
+                            <button onclick="showScreen('transaction-history-screen')"><i class="fas fa-search"></i> Historial Completo</button>
+                        </div>
+                    </div>
+
+                    <div class="widget recent-transactions">
+                        <h3>Últimas Transacciones</h3>
+                        <div class="transaction-list" id="ultimas-transacciones">
+                            <p class="loading">Cargando transacciones...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REGISTER PAYMENT SCREEN -->
+            <section id="register-payment-screen" class="screen">
+                <h2>Registrar Nuevo Pago</h2>
+                <div class="payment-form-grid">
+                    <div class="form-column">
+                        <div class="widget balance-summary">
+                            <h3>Deuda Pendiente:</h3>
+                            <span class="amount-primary" id="deuda-form">$0 COP</span>
+                        </div>
+
+                        <form id="payment-form">
+                            <!-- Campo Concepto (texto libre) -->
+                            <div class="form-group">
+                                <label for="concepto">Concepto del Pago *</label>
+                                <input type="text" id="concepto" name="concepto" placeholder="Ej: Matrícula 2024" required maxlength="255">
+                                <p class="help-text">Describa qué está pagando</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="monto">Monto a Pagar *</label>
+                                <input type="number" id="monto" name="monto" placeholder="Ej: 150000" required min="1" step="0.01">
+                                <p class="help-text">Debe ser mayor a cero</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fecha">Fecha del Pago *</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                                <p class="help-text">No se permiten fechas futuras</p>
+                            </div>
+
+                            <!-- Métodos de pago: Efectivo, Transferencia, Tarjeta -->
+                            <div class="form-group">
+                                <label for="metodo">Método de Pago *</label>
+                                <select id="metodo" name="metodo_pago_id" required>
+                                    <option value="">Seleccione un método...</option>
+                                </select>
+                            </div>
+
+                            <!-- Carga de comprobante -->
+                            <div class="form-group">
+                                <label for="comprobante">Comprobante (opcional)</label>
+                                <input type="file" id="comprobante" name="comprobante" accept="image/*,.pdf">
+                                <p class="help-text">Imagen o PDF del comprobante de pago</p>
+                            </div>
+
+                            <button type="submit" class="action-btn-confirm" id="btn-confirmar">
+                                <i class="fas fa-check"></i> Confirmar Pago
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ESTADO DE CUENTA SCREEN - Vista tipo "Cartola Bancaria" -->
+            <section id="estado-cuenta-screen" class="screen">
+                <h2>Estado de Cuenta</h2>
+                
+                <!-- Resumen de saldos -->
+                <div class="estado-cuenta-resumen">
+                    <div class="resumen-card aprobado">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <span class="label">Total Pagado</span>
+                            <span class="valor" id="ec-total-pagado">$0</span>
+                        </div>
+                    </div>
+                    <div class="resumen-card pendiente">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="label">Pagos Pendientes</span>
+                            <span class="valor" id="ec-total-pendiente">$0</span>
+                        </div>
+                    </div>
+                    <div class="resumen-card rechazado">
+                        <i class="fas fa-times-circle"></i>
+                        <div>
+                            <span class="label">Rechazados</span>
+                            <span class="valor" id="ec-total-rechazado">$0</span>
+                        </div>
+                    </div>
+                    <div class="resumen-card deuda">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <span class="label">Deuda Total</span>
+                            <span class="valor" id="ec-deuda-total">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filtros-estado-cuenta widget">
+                    <h3><i class="fas fa-filter"></i> Filtros</h3>
+                    <div class="filtros-row">
+                        <div class="filtro-group">
+                            <label>Fecha Inicio:</label>
+                            <input type="date" id="filtro-fecha-inicio">
+                        </div>
+                        <div class="filtro-group">
+                            <label>Fecha Fin:</label>
+                            <input type="date" id="filtro-fecha-fin">
+                        </div>
+                        <div class="filtro-group">
+                            <label>Estado:</label>
+                            <select id="filtro-estado">
+                                <option value="todos">Todos</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Aprobado">Aprobado</option>
+                                <option value="Rechazado">Rechazado</option>
+                            </select>
+                        </div>
+                        <button class="action-btn-primary" onclick="cargarEstadoCuenta()">
+                            <i class="fas fa-search"></i> Filtrar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabla tipo Cartola -->
+                <div class="widget transaction-table-container">
+                    <table class="transaction-table cartola">
+                        <thead>
+                        <tr>
+                            <th>N° Operación</th>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th>Método</th>
+                            <th class="text-right">Monto</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody id="estado-cuenta-body">
+                            <tr><td colspan="7" class="loading">Cargando estado de cuenta...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- TRANSACTION HISTORY SCREEN -->
+            <section id="transaction-history-screen" class="screen">
+                <div class="history-header">
+                    <h2>Historial de Transacciones</h2>
+                    <div class="history-actions">
+                        <div class="search-box">
+                            <input type="text" id="search-transactions" placeholder="Buscar por concepto o N° operación...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <button class="action-btn-secondary" onclick="cargarTransacciones()">
+                            <i class="fas fa-sync"></i> Actualizar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-tabs-web">
+                    <button class="tab-button active" data-filter="todos">TODOS</button>
+                    <button class="tab-button" data-filter="hoy">HOY</button>
+                    <button class="tab-button" data-filter="semana">ÚLTIMOS 7 DÍAS</button>
+                    <button class="tab-button" data-filter="mes">ESTE MES</button>
+                </div>
+
+                <div class="widget transaction-table-container">
+                    <table class="transaction-table">
+                        <thead>
+                        <tr>
+                            <th>N° Operación</th>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th class="text-right">Monto</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody id="transactions-table-body">
+                            <tr><td colspan="6" class="loading">Cargando transacciones...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<!-- Modal para ver/generar recibo -->
+<div id="modal-recibo" class="modal">
+    <div class="modal-content recibo-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-receipt"></i> Recibo de Pago</h3>
+            <button class="close-btn" onclick="cerrarModalRecibo()">&times;</button>
+        </div>
+        <div id="recibo-container" class="recibo-container">
+            <!-- El recibo se genera dinámicamente -->
+        </div>
+        <div class="recibo-actions">
+            <button class="action-btn-primary" onclick="imprimirRecibo()">
+                <i class="fas fa-print"></i> Imprimir
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast para notificaciones -->
+<div id="toast" class="toast"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
