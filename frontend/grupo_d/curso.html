@@ -204,8 +204,8 @@
     </div>
   </div>
   <script>
-    // Configura la URL del backend. Ajusta el puerto si es distinto.
-    const API = 'http://localhost:8080'
+    // Configura la URL del backend. Usamos relativa para mayor flexibilidad.
+    const API = '' // Usar ruta relativa al origen actual
     let estudiantes_inscritos = null
 
     async function loadCursos() {
