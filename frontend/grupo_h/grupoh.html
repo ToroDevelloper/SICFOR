@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICFOR - Evaluaciones y Calificaciones (Grupo H)</title>
+    <link rel="stylesheet" href="grupoh.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-graduation-cap"></i> SICFOR</h2>
+                <p class="subtitle">Grupo H - Evaluaciones</p>
+            </div>
+            
+            <ul class="sidebar-menu" id="sidebar-menu">
+                <li>
+                    <a href="#" class="active" data-section="inicio">
+                        <i class="fas fa-home"></i> Inicio / Listado
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="crear-evaluacion">
+                        <i class="fas fa-plus-circle"></i> Crear evaluación
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="registrar-notas">
+                        <i class="fas fa-edit"></i> Registrar notas
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="retroalimentacion">
+                        <i class="fas fa-comment-dots"></i> Retroalimentación
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="reportes">
+                        <i class="fas fa-chart-bar"></i> Reportes simples
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <p><i class="fas fa-user"></i> Docente: Juana Pérez</p>
+                <p class="email">juan.perez@sicfor.edu</p>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <h1 id="page-title">Evaluaciones y Calificaciones</h1>
+                <div class="header-info">
+                    <div class="info-item">
+                        <span class="label">Grupo:</span>
+                        <span class="value">H</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Estado:</span>
+                        <span class="status active">Activo</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Loading Overlay -->
+            <div id="loading-overlay" class="loading-overlay">
+                <div class="spinner"></div>
+                <p>Cargando información...</p>
+            </div>
+
+            <!-- Error Message Container -->
+            <div id="error-container" class="error-container" style="display: none;">
+                <div class="error-alert" id="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="error-text">Ha ocurrido un error</span>
+                    <button onclick="hideError()" class="error-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Content Sections -->
+            <div id="content-sections">
+                <!-- Inicio / Listado Section -->
+                <section id="inicio-section" class="content-section active">
+                    <div class="section-header">
+                        <h2>Gestión de Evaluaciones</h2>
+                        <div class="actions">
+                            <button class="btn btn-primary" onclick="loadEvaluaciones()">
+                                <i class="fas fa-sync-alt"></i> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-icon bg-blue">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3 id="total-estudiantes">25</h3>
+                                <p>Estudiantes</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon bg-green">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3 id="promedio-general">3.8</h3>
+                                <p>Promedio General</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon bg-red">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3 id="en-riesgo">3</h3>
+                                <p>En Riesgo</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon bg-purple">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3 id="aprobacion">85%</h3>
+                                <p>Aprobación</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div class="table-header">
+                            <h3>Listado de Evaluaciones</h3>
+                            <div class="search-box">
+                                <input type="text" id="search-evaluacion" placeholder="Buscar evaluación...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre Evaluación</th>
+                                        <th>Tipo</th>
+                                        <th>Fecha</th>
+                                        <th>Entregas</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="evaluaciones-table-body">
+                                    <!-- Las evaluaciones se cargarán aquí dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Crear Evaluación Section -->
+                <section id="crear-evaluacion-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Nueva Evaluación</h2>
+                        <p>Complete el formulario para crear una nueva evaluación</p>
+                    </div>
+                    
+                    <form id="form-crear-evaluacion" class="form-container">
+                        <div class="form-section">
+                            <h3><i class="fas fa-info-circle"></i> Información General</h3>
+                            
+                            <div class="form-group">
+                                <label for="nombre-evaluacion">Nombre de la Evaluación *</label>
+                                <input type="text" id="nombre-evaluacion" required 
+                                       placeholder="Ej: Parcial Final">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tipo-evaluacion">Tipo *</label>
+                                    <select id="tipo-evaluacion" required>
+                                        <option value="">Seleccione tipo</option>
+                                        <option value="Escrito">Escrito</option>
+                                        <option value="Práctica">Práctica</option>
+                                        <option value="Oral">Oral</option>
+                                        <option value="Proyecto">Proyecto</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="fecha-evaluacion">Fecha Programada *</label>
+                                    <input type="date" id="fecha-evaluacion" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="porcentaje">Porcentaje (%) *</label>
+                                    <input type="number" id="porcentaje" min="0" max="100" 
+                                           step="0.1" value="20" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3><i class="fas fa-cog"></i> Configuración</h3>
+                            
+                            <div class="form-group">
+                                <label for="instrucciones">Instrucciones</label>
+                                <textarea id="instrucciones" rows="4" 
+                                          placeholder="Describa las instrucciones para el estudiante..."></textarea>
+                            </div>
+                            
+                            <div class="form-checkbox-group">
+                                <input type="checkbox" id="habilitar-entrega">
+                                <label for="habilitar-entrega">Habilitar entrega digital de archivos</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="rubrica">Adjuntar Rúbrica (PDF)</label>
+                                <div class="file-upload">
+                                    <input type="file" id="rubrica" accept=".pdf">
+                                    <label for="rubrica" class="file-label">
+                                        <i class="fas fa-paperclip"></i>
+                                        <span>Seleccionar archivo</span>
+                                    </label>
+                                    <span class="file-name" id="file-name">Ningún archivo seleccionado</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Crear Evaluación
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Registrar Notas Section -->
+                <section id="registrar-notas-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Registro de Calificaciones</h2>
+                        <div class="actions">
+                            <div class="form-group-inline">
+                                <label for="select-evaluacion">Evaluación:</label>
+                                <select id="select-evaluacion" onchange="loadCalificaciones()">
+                                    <option value="">Seleccione evaluación</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Estudiante</th>
+                                        <th>Nota (0-5)</th>
+                                        <th>Observación Corta</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calificaciones-table-body">
+                                    <!-- Las calificaciones se cargarán aquí dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="section-actions">
+                        <button class="btn btn-success" onclick="guardarTodasCalificaciones()">
+                            <i class="fas fa-save"></i> Guardar Todas las Calificaciones
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Retroalimentación Section -->
+                <section id="retroalimentacion-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Retroalimentación</h2>
+                        <div class="actions">
+                            <div class="form-group-inline">
+                                <label for="select-estudiante-retro">Estudiante:</label>
+                                <select id="select-estudiante-retro">
+                                    <option value="">Seleccione estudiante</option>
+                                </select>
+                            </div>
+                            <div class="form-group-inline">
+                                <label for="select-evaluacion-retro">Evaluación:</label>
+                                <select id="select-evaluacion-retro">
+                                    <option value="">Seleccione evaluación</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="retroalimentacion-container">
+                        <div class="student-info">
+                            <div class="student-avatar" id="student-avatar">
+                                AG
+                            </div>
+                            <div class="student-details">
+                                <h3 id="student-name">Ana García</h3>
+                                <p id="student-evaluacion">Parcial Corte 1</p>
+                                <p id="student-nota">Nota: 4.5</p>
+                            </div>
+                        </div>
+                        
+                        <div class="comentario-container">
+                            <h4><i class="fas fa-comment-medical"></i> Comentarios Detallados</h4>
+                            <textarea id="comentario-retro" rows="6" 
+                                      placeholder="Escriba aquí la retroalimentación..."></textarea>
+                            
+                            <div class="comentario-actions">
+                                <button class="btn btn-primary" onclick="guardarRetroalimentacion()">
+                                    <i class="fas fa-save"></i> Guardar Comentario
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="historial-container">
+                            <h4><i class="fas fa-history"></i> Historial</h4>
+                            <div class="historial-list" id="historial-list">
+                                <!-- Historial se cargará aquí dinámicamente -->
+                                <div class="historial-item">
+                                    <div class="historial-date">20 Oct. 10:30 AM</div>
+                                    <div class="historial-comment">
+                                        Se sugiere revisar la bibliografía del capítulo 3 para mejorar la argumentación técnica.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reportes Section -->
+                <section id="reportes-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Reportes de Rendimiento</h2>
+                        <div class="actions">
+                            <button class="btn btn-primary" onclick="generarReporte()">
+                                <i class="fas fa-file-export"></i> Generar Reporte
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="reportes-container">
+                        <div class="reporte-card">
+                            <h3>Distribución de Notas</h3>
+                            <div class="grafico-container">
+                                <canvas id="grafico-distribucion"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="reporte-card">
+                            <h3>Evolución del Promedio</h3>
+                            <div class="grafico-container">
+                                <canvas id="grafico-evolucion"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="estadisticas-detalladas">
+                        <h3>Estadísticas del Grupo H</h3>
+                        <div class="estadisticas-grid">
+                            <div class="estadistica-item">
+                                <h4>Mejor Nota</h4>
+                                <p class="valor" id="mejor-nota">5.0</p>
+                            </div>
+                            <div class="estadistica-item">
+                                <h4>Peor Nota</h4>
+                                <p class="valor" id="peor-nota">0.0</p>
+                            </div>
+                            <div class="estadistica-item">
+                                <h4>Desviación Estándar</h4>
+                                <p class="valor" id="desviacion">0.8</p>
+                            </div>
+                            <div class="estadistica-item">
+                                <h4>Estudiantes Activos</h4>
+                                <p class="valor" id="activos">22</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer -->
+            <footer class="content-footer">
+                <p>Sistema SICFOR - Módulo de Evaluaciones y Calificaciones - Grupo H</p>
+                <p>© 2023 Universidad Institucional</p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../backend/grupo_h/grupoh.js"></script>
+</body>
+</html>
