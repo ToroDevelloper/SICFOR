@@ -20,6 +20,7 @@ const estudiantesRoutes = require('./backend/grupo_b/routes/estudiantes.js');
 const cursosRoutes = require('./backend/grupo_d/routes/cursos.js');
 import ticketRoutes from './backend/grupo_j/routes/ticketRoutes.js';
 import { initSchema as initTicketSchema } from './backend/grupo_j/db.js';
+import instructorRoutes from './backend/grupo_c/routes/instructorRoutes.js';
 
 // Middleware
 app.use(cors());
@@ -33,6 +34,7 @@ app.use('/frontend', express.static(path.join(__dirname, 'frontend')));
 app.use('/estudiantes', estudiantesRoutes);
 app.use('/api', cursosRoutes); // Grupo D
 app.use('/api', ticketRoutes); // Grupo J
+app.use('/api/instructores', instructorRoutes); // Grupo C
 
 // Ruta principal para el Dashboard
 app.get('/', (req, res) => {
