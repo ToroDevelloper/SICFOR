@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Insumos y Recursos - Grupo E</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Grupo E</h1>
+                <p class="subtitle">Gestión de Recursos</p>
+            </div>
+
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="#" class="nav-item active" data-section="dashboard">
+                            <span class="icon">📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="pdf">
+                            <span class="icon">📄</span>
+                            <span>Material PDF</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="guias">
+                            <span class="icon">📋</span>
+                            <span>Guías</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="videos">
+                            <span class="icon">🎥</span>
+                            <span>Videos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="enlaces">
+                            <span class="icon">🔗</span>
+                            <span>Enlaces</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="crud">
+                            <span class="icon">⚙️</span>
+                            <span>CRUD de Recursos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-item" data-section="config">
+                            <span class="icon">⚡</span>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>© 2024 Grupo E</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p>Resumen de recursos académicos</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon pdf-icon">📄</div>
+                        <div class="stat-info">
+                            <h3>Materiales PDF</h3>
+                            <p class="stat-number" id="count-pdf">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon guia-icon">📋</div>
+                        <div class="stat-info">
+                            <h3>Guías</h3>
+                            <p class="stat-number" id="count-guias">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon video-icon">🎥</div>
+                        <div class="stat-info">
+                            <h3>Videos</h3>
+                            <p class="stat-number" id="count-videos">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon enlace-icon">🔗</div>
+                        <div class="stat-info">
+                            <h3>Enlaces</h3>
+                            <p class="stat-number" id="count-enlaces">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3>Recursos Recientes</h3>
+                    <div id="recent-recursos" class="recursos-list">
+                        <p class="empty-state">No hay recursos agregados aún</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Material PDF Section -->
+            <section id="pdf" class="content-section">
+                <div class="section-header">
+                    <h2>Material PDF</h2>
+                    <button class="btn btn-primary" onclick="openAddResourceModal('pdf')">+ Agregar PDF</button>
+                </div>
+
+                <div id="pdf-list" class="recursos-grid">
+                    <p class="empty-state">No hay materiales PDF</p>
+                </div>
+            </section>
+
+            <!-- Guías Section -->
+            <section id="guias" class="content-section">
+                <div class="section-header">
+                    <h2>Guías</h2>
+                    <button class="btn btn-primary" onclick="openAddResourceModal('guias')">+ Agregar Guía</button>
+                </div>
+
+                <div id="guias-list" class="recursos-grid">
+                    <p class="empty-state">No hay guías</p>
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section id="videos" class="content-section">
+                <div class="section-header">
+                    <h2>Videos</h2>
+                    <button class="btn btn-primary" onclick="openAddResourceModal('videos')">+ Agregar Video</button>
+                </div>
+
+                <div id="videos-list" class="recursos-grid">
+                    <p class="empty-state">No hay videos</p>
+                </div>
+            </section>
+
+            <!-- Enlaces Section -->
+            <section id="enlaces" class="content-section">
+                <div class="section-header">
+                    <h2>Enlaces</h2>
+                    <button class="btn btn-primary" onclick="openAddResourceModal('enlaces')">+ Agregar Enlace</button>
+                </div>
+
+                <div id="enlaces-list" class="recursos-grid">
+                    <p class="empty-state">No hay enlaces</p>
+                </div>
+            </section>
+
+            <!-- CRUD de Recursos Section -->
+            <section id="crud" class="content-section">
+                <div class="section-header">
+                    <h2>CRUD de Recursos</h2>
+                    <button class="btn btn-primary" onclick="openCrudModal()">+ Nuevo Recurso</button>
+                </div>
+
+                <div class="crud-filters">
+                    <input type="text" id="search-input" placeholder="Buscar recurso..." class="search-input">
+                    <select id="type-filter" class="filter-select">
+                        <option value="">Todos los tipos</option>
+                        <option value="pdf">PDF</option>
+                        <option value="guias">Guías</option>
+                        <option value="videos">Videos</option>
+                        <option value="enlaces">Enlaces</option>
+                    </select>
+                </div>
+
+                <div id="crud-list" class="crud-table-container">
+                    <table class="crud-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crud-tbody">
+                            <tr>
+                                <td colspan="5" class="empty-message">No hay recursos. Agrega uno nuevo.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Configuración Section -->
+            <section id="config" class="content-section">
+                <div class="section-header">
+                    <h2>Configuración</h2>
+                </div>
+
+                <div class="config-container">
+                    <div class="config-group">
+                        <h3>Gestión de Datos</h3>
+                        <p>Manage your application data</p>
+                        <button class="btn btn-secondary" onclick="exportData()">📥 Exportar Datos</button>
+                        <button class="btn btn-secondary" onclick="importData()">📤 Importar Datos</button>
+                        <button class="btn btn-danger" onclick="clearAllData()">🗑️ Limpiar Todo</button>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Información</h3>
+                        <p>Sistema de Gestión de Insumos y Recursos Académicos</p>
+                        <p style="font-size: 12px; color: #666;">v1.0 - Grupo E</p>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Estadísticas</h3>
+                        <div id="stats-info"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Add/Edit Resource -->
+    <div id="resourceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Agregar Recurso</h2>
+                <button class="modal-close" onclick="closeResourceModal()">&times;</button>
+            </div>
+
+            <form id="resourceForm" class="form">
+                <div class="form-group">
+                    <label for="resource-titulo">Título *</label>
+                    <input type="text" id="resource-titulo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-descripcion">Descripción</label>
+                    <textarea id="resource-descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-archivo">Archivo Local (Imagen/Video)</label>
+                    <input type="file" id="resource-archivo" accept="image/*,video/*" onchange="validarTamanoArchivoResource()">
+                    <small style="color: #666;">📸 Imágenes: máx 10 MB | 🎥 Videos: máx 30 MB</small>
+                    <div id="file-info-resource" style="margin-top: 8px; font-size: 12px;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-url">URL/Enlace (si no subes archivo)</label>
+                    <input type="text" id="resource-url" placeholder="O proporciona una URL">
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-autor">Autor/Creador</label>
+                    <input type="text" id="resource-autor">
+                </div>
+
+                <div class="form-group">
+                    <label for="resource-etiquetas">Etiquetas (separadas por coma)</label>
+                    <input type="text" id="resource-etiquetas" placeholder="ej: javascript, web, frontend">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeResourceModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal CRUD -->
+    <div id="crudModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="crud-modal-title">Nuevo Recurso</h2>
+                <button class="modal-close" onclick="closeCrudModal()">&times;</button>
+            </div>
+
+            <form id="crudForm" class="form">
+                <div class="form-group">
+                    <label for="crud-tipo">Tipo *</label>
+                    <select id="crud-tipo" required>
+                        <option value="">Selecciona un tipo</option>
+                        <option value="pdf">PDF</option>
+                        <option value="guias">Guía</option>
+                        <option value="videos">Video</option>
+                        <option value="enlaces">Enlace</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="crud-titulo">Título *</label>
+                    <input type="text" id="crud-titulo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="crud-descripcion">Descripción</label>
+                    <textarea id="crud-descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>☁️ Tipo de Almacenamiento</label>
+                    <div style="display: flex; gap: 20px; margin: 10px 0;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="storage-type" value="aws" checked onchange="cambiarTipoStorage()">
+                            <span style="margin-left: 8px;">📦 AWS S3 (Nube)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="storage-type" value="local" onchange="cambiarTipoStorage()">
+                            <span style="margin-left: 8px;">💾 Local (En mi servidor)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="crud-archivo">Archivo (Imagen/Video) *</label>
+                    <input type="file" id="crud-archivo" accept="image/*,video/*" required onchange="validarTamanoArchivo()">
+                    <small style="color: #666;">📸 Imágenes: máx 10 MB | 🎥 Videos: máx 30 MB</small>
+                    <div id="file-info" style="margin-top: 8px; font-size: 12px;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="crud-url">URL/Enlace (Opcional)</label>
+                    <input type="text" id="crud-url" placeholder="Si no subes archivo, proporciona una URL">
+                </div>
+
+                <div class="form-group">
+                    <label for="crud-autor">Autor/Creador</label>
+                    <input type="text" id="crud-autor">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeCrudModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Visualización de Media -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content media-modal">
+            <div class="modal-header">
+                <h2 id="media-title">Visualización</h2>
+                <button class="modal-close" onclick="closeMediaModal()">&times;</button>
+            </div>
+
+            <div class="media-body">
+                <div id="media-container" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+                    <!-- Media se carga aquí -->
+                </div>
+
+                <div id="media-description" style="text-align: center; color: #666; margin-top: 15px; padding: 0 20px;"></div>
+
+                <div class="media-actions" style="display: flex; gap: 10px; justify-content: center; padding: 20px; border-top: 1px solid #eee;">
+                    <button class="btn btn-secondary" onclick="closeMediaModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFile" style="display: none;" accept=".json">
+
+    <script src="script.js"></script>
+</body>
+</html>
